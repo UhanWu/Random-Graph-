@@ -1,0 +1,34 @@
+---
+title: "Strong Ideology From States"
+author: "Yuhan Wu"
+date: "6/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(primer.data)
+```
+
+```{r,echo=FALSE}
+nes%>%
+  group_by(state,ideology)%>%
+filter(ideology != "Weak Republican"&
+         ideology !="Weak Democrat"&
+       ideology !="Independent - Democrat"&
+       ideology !="Independent - Independent"&
+       ideology !="Independent - Republican"
+       )%>%
+summarise(total=n(),
+          .groups = "drop")%>%
+  drop_na()%>%
+  ggplot(mapping=aes(x=state, y=total, fill=ideology))+
+  geom_col(position="dodge")+
+  scale_x_discrete(guide = guide_axis(n.dodge=3))+
+  coord_cartesian(xlim = c(0, 50))+
+  labs(title = "Total number of Strong Ideologists in 50 states in the US since 1948", subtitle = "Population of Strong Democrats is greater and Strong Republicans in almost every state ", x="States",y="Population investicated",fill="Political Ideology", caption=" American National Election Studies (ANES)")
+
+
+```
+
