@@ -14,12 +14,17 @@ library(dplyr)
 ```
 
 ```{r}
-file_test1 <- "MASTHPI.csv"
+file_test1 <- "BOXRSA.csv"
 read.csv(file_test1)%>%
-  select(DATE,MASTHPI)%>%
-  ggplot(mapping = aes(x=DATE,y= MASTHPI,group = 1))+
-  geom_line()+
-  coord_cartesian(ylim = c(0, 800))
+  mutate(Months= str_sub(DATE,6,7))%>%
+  ggplot(mapping = aes(x=DATE,y= BOXRSA,group = 1))+
+  geom_col(position = "dodge")+
+  geom_smooth()
+ 
   
+```
+
+```{r}
+#mutate(Months= str_sub(DATE,6,7))%>% filter(Months=="01")%>%
 ```
 
