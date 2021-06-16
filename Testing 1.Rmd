@@ -1,0 +1,25 @@
+---
+title: "Testing data"
+author: "Yuhan Wu"
+date: "6/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(readr)
+library(tibbletime)
+library(dplyr)
+```
+
+```{r}
+file_test1 <- "MASTHPI.csv"
+read.csv(file_test1)%>%
+  select(DATE,MASTHPI)%>%
+  ggplot(mapping = aes(x=DATE,y= MASTHPI,group = 1))+
+  geom_line()+
+  coord_cartesian(ylim = c(0, 800))
+  
+```
+
