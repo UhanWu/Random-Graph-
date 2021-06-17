@@ -18,7 +18,7 @@ file_test1 <- "BOXRSA.csv"
 read.csv(file_test1)%>%
   mutate(Months= str_sub(DATE,6,7))%>%
   ggplot(mapping = aes(x=DATE,y= BOXRSA,group = 1))+
-  geom_col(position = "dodge")+
+  geom_line(method= loess, formula=y~x)+
   geom_smooth()
  
   
